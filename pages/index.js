@@ -38,8 +38,8 @@ export default function Index() {
             <div class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-teal-500">
               <h1 className="text-3xl">Welcome Back, {username}!</h1>
               <h1 className="font-light italic text-xl">
-                What hurts today makes you stronger tomorrow! It's never too
-                late to get started...
+                {`What hurts today makes you stronger tomorrow! It's never too
+                late to get started...`}
               </h1>
             </div>
           ) : (

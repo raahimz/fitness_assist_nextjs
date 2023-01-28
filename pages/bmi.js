@@ -48,10 +48,10 @@ export default function Bmi() {
               Calculate Your BMI
             </h1>
             <p className="max-w-lg ml-auto mr-auto text-gray-300 font-light">
-              A BMI calculator is a tool that uses a person's weight and height
+              {`A BMI calculator is a tool that uses a person's weight and height
               to determine their body mass index (BMI). It is a simple way to
               assess whether a person is underweight, normal weight, overweight,
-              or obese.
+              or obese.`}
             </p>
           </div>
           <div className="font-extralight secondaryBg shadow-md my-12 rounded-lg p-3 w-fit ml-auto mr-auto text-center">

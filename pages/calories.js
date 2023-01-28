@@ -143,9 +143,9 @@ export default function Calories() {
               Track Your Calories
             </h1>
             <p className="max-w-lg ml-auto mr-auto text-gray-300 font-light">
-              Keep track of you dialy calories intake categorically and make
+              {`Keep track of you dialy calories intake categorically and make
               sure it's under the set limit. See how much calories you intake
-              graphically.
+              graphically.`}
             </p>
           </div>
           <div className="flex flex-row justify-center gap-4 mt-12">
