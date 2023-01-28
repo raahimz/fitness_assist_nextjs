@@ -4,7 +4,7 @@ export default function Layout({ children, isAuthenticated }) {
   return (
     <>
       <Navbar isAuthenticated={isAuthenticated} />
-      <main className="px-8 py-4">{children}</main>
+      <main className="px-8 py-8">{children}</main>
     </>
   );
 }

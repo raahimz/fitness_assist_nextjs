@@ -4,6 +4,7 @@ import MagicButton from '@/components/magic_button';
 import SecondaryButton from '@/components/secondary_button';
 import { useEffect, useState } from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
+import Link from 'next/link';
 
 export default function Index() {
   const [showLoginPrompt, setShowLoginPrompt] = useState(false);
@@ -30,7 +31,7 @@ export default function Index() {
     <Layout isAuthenticated={isAuthenticated}>
       <div
         id="home-container"
-        className="flex sm:text-center md:text-center lg:text-left sm:flex-col md:flex-col lg:flex-row justify-between xl:px-32 lg:px-16 md:px-8 py-16 items-center "
+        className="flex sm:text-center md:text-center lg:text-left sm:flex-col md:flex-col lg:flex-row justify-between xl:px-32 lg:px-16 md:px-8 py-12 items-center "
       >
         <div className="flex flex-col gap-16">
           {isAuthenticated ? (
@@ -69,22 +70,27 @@ export default function Index() {
               </div>
             ) : (
               <div className="mt-6">
-                <SecondaryButton
-                  label={'Bmi'}
-                  onClickHandler={() => setShowLoginPrompt(true)}
-                />
-                <SecondaryButton
-                  label={'Calories'}
-                  onClickHandler={() => setShowLoginPrompt(true)}
-                />
-                <SecondaryButton
-                  label={'Progress'}
-                  onClickHandler={() => setShowLoginPrompt(true)}
-                />
-                <SecondaryButton
-                  label={'Workout'}
-                  onClickHandler={() => setShowLoginPrompt(true)}
-                />
+                <Link href="/bmi">
+                  <SecondaryButton label={'Bmi'} onClickHandler={() => {}} />
+                </Link>
+                <Link href="/calories">
+                  <SecondaryButton
+                    label={'Calories'}
+                    onClickHandler={() => {}}
+                  />
+                </Link>
+                <Link href="/progress">
+                  <SecondaryButton
+                    label={'Progress'}
+                    onClickHandler={() => {}}
+                  />
+                </Link>
+                <Link href="/workout">
+                  <SecondaryButton
+                    label={'Workout'}
+                    onClickHandler={() => {}}
+                  />
+                </Link>
               </div>
             )}
           </div>

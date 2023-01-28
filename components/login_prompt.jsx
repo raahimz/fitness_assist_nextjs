@@ -13,14 +13,16 @@ export default function LoginPrompt({ showLoginPrompt, setShowLoginPrompt }) {
       alert("Username can't be less than 8 characters!");
     } else {
       setLoggingIn(true);
-      let res = await fetch('/api/authenticate', {
+      let res = await fetch('/api/user/authenticate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username }),
       });
+
       setLoggingIn(false);
+
       if (res.status === 200) {
         localStorage.setItem('username', JSON.stringify(username));
         // alert('Welcome back!');
@@ -36,25 +38,25 @@ export default function LoginPrompt({ showLoginPrompt, setShowLoginPrompt }) {
       id="defaultModal"
       tabindex="-1"
       aria-hidden="true"
-      class={`fixed top-0 left-0 right-0 z-50 w-full lg:pl-72 md:pl-44 pt-32 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full lg:pl-72 md:pl-44 pt-32 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full ${
         !showLoginPrompt ? 'hidden' : ''
       }`}
     >
-      <div class="relative w-full h-full max-w-2xl md:h-auto">
-        <div class="relative rounded-lg shadow secondaryBg">
-          <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+      <div className="relative w-full h-full max-w-2xl md:h-auto">
+        <div className="relative rounded-lg shadow secondaryBg">
+          <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
               Login
             </h3>
             <button
               type="button"
-              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="defaultModal"
               onClick={closeModal}
             >
               <svg
                 aria-hidden="false"
-                class="w-5 h-5"
+                className="w-5 h-5"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,29 +67,29 @@ export default function LoginPrompt({ showLoginPrompt, setShowLoginPrompt }) {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span class="sr-only">Close modal</span>
+              <span className="sr-only">Close modal</span>
             </button>
           </div>
-          <div class="p-6 space-y-4">
-            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+          <div className="p-6 space-y-4">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
               Proper authentication system is not yet implemented as this app is
               not for production and made for JC Code_Sprint 2023.
             </p>
-            <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
               Please use the following username for testing: testuser1
             </p>
-            <div class="">
+            <div className="">
               <input
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                 placeholder="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
           </div>
-          <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
             <button
-              class="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
+              className="text-white bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800"
               onClick={login}
             >
               Log In
@@ -95,7 +97,7 @@ export default function LoginPrompt({ showLoginPrompt, setShowLoginPrompt }) {
             <div className={`${!loggingIn ? 'hidden' : ''}`}>
               <svg
                 aria-hidden="true"
-                class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-teal-600"
+                className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-teal-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

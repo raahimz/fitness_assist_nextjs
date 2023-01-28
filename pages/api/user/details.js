@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-var User = require('./user_model.js');
+var User = require('../user_model.js');
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     console.log('working.....');
     // Getting username from body
-    // const body = JSON.parse(req.body);
     let username = req.body.username;
 
     // DB
@@ -15,10 +14,10 @@ export default async function handler(req, res) {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    let userFound = await User.exists({ username });
+    let userFound = await User.find({ username });
 
     if (userFound) {
-      res.status(200).send({ user: userFound.username });
+      res.status(200).json({ user: userFound[0] });
     } else {
       res.status(401).json({ error: 'invalid username' });
     }

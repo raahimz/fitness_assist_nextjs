@@ -1,7 +1,17 @@
-export default function TextButton({ label }) {
+import Link from 'next/link';
+
+export default function TextButton({ label, url, isAuthenticated }) {
   return (
-    <p className="hover:cursor-pointer cursor-default hover:opacity-75 text-lg font-extralight">
-      {label}
-    </p>
+    <Link href={isAuthenticated ? url : '/'}>
+      <p
+        className={`cursor-default hover:opacity-75 text-lg font-extralight ${
+          !isAuthenticated ? 'opacity-75' : 'opacity-100'
+        } ${
+          !isAuthenticated ? 'hover:cursor-default' : 'hover:cursor-pointer'
+        }`}
+      >
+        {label}
+      </p>
+    </Link>
   );
 }

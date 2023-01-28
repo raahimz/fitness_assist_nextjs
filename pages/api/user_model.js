@@ -6,6 +6,20 @@ const codesprintUserSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  calories: {
+    day: {
+      type: Number,
+    },
+    consumed: {
+      type: Number,
+    },
+    burned: {
+      type: Number,
+    },
+    maximum: {
+      type: Number,
+    },
+  },
 });
 
 module.exports =
