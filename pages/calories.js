@@ -92,6 +92,28 @@ export default function Calories() {
     }
   };
 
+  const resetCalories = async (new_date) => {
+    // Getting username from localstorage
+    const username = JSON.parse(localStorage.getItem('username'));
+
+    let res = await fetch('/api/user/reset_calories', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, new_date }),
+    });
+
+    if (res.status === 200) {
+      const user_data = await res.json();
+      setMaxCalories(user_data.user.calories.maximum);
+      setCalories(user_data.user.calories.consumed);
+      setCaloriesBurned(user_data.user.calories.burned);
+    } else {
+      alert('Error');
+    }
+  };
+
   const getUserDetails = async () => {
     // Getting username from localstorage
     const username = JSON.parse(localStorage.getItem('username'));
@@ -106,9 +128,15 @@ export default function Calories() {
 
     if (res.status === 200) {
       const user_data = await res.json();
-      setMaxCalories(user_data.user.calories.maximum);
-      setCalories(user_data.user.calories.consumed);
-      setCaloriesBurned(user_data.user.calories.burned);
+
+      const currentDate = new Date();
+      if (user_data.user.calories.day !== currentDate.getDate()) {
+        resetCalories(currentDate.getDate());
+      } else {
+        setMaxCalories(user_data.user.calories.maximum);
+        setCalories(user_data.user.calories.consumed);
+        setCaloriesBurned(user_data.user.calories.burned);
+      }
     } else {
       alert('Error');
     }
@@ -196,7 +224,7 @@ export default function Calories() {
                 />
               </div>
               <div className="flex flex-row gap-2">
-                <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 w-fit flex flex-col justify-between gap-6">
+                <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 w-fit flex flex-col justify-between gap-10">
                   <div>
                     <h3 className="font-bold text-xl">Add Calories</h3>
                     <p className="font-light text-sm text-gray-500">
@@ -205,7 +233,7 @@ export default function Calories() {
                   </div>
                   <input
                     type="number"
-                    class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500"
+                    class="bg-[#121212] border focus:outline-none border-[#121212] text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-[#121212] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                     placeholder="200"
                     value={newCalories}
                     onChange={(e) => setNewCalories(e.target.value)}
@@ -221,7 +249,7 @@ export default function Calories() {
                   </div>
                   <input
                     type="number"
-                    class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500"
+                    class="bg-[#121212] border focus:outline-none border-[#121212] text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:[#1212120] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                     placeholder="400"
                     value={newExercise}
                     onChange={(e) => setNewExercise(e.target.value)}

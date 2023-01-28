@@ -64,8 +64,6 @@ export default function ProgressChart({ setStart, setCurrent }) {
         labels.push(weights[i].day);
         data.push(weights[i].value);
       }
-      console.log(labels);
-      console.log(data);
       let sorted_data = sort(labels, data);
       sorted_data.shift();
       let sorted_labels = labels.sort();
@@ -84,7 +82,6 @@ export default function ProgressChart({ setStart, setCurrent }) {
         ],
       });
       setStart(sorted_data[0]);
-      console.log(sorted_data);
       setCurrent(sorted_data[sorted_data.length - 1]);
     } else {
       alert('Error');

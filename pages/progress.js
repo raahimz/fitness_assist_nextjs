@@ -1,40 +1,39 @@
 import Layout from '@/components/layout';
 import { useEffect, useState } from 'react';
-import RemainingCaloriesChart from '@/components/charts/remaining_calories_chart';
-import FlagIcon from '@/components/icons/flag_icon';
-import CaloriesGoalLabel from '@/components/calories_goal_label';
-import FoodIcon from '@/components/icons/food_icon';
-import BurnIcon from '@/components/icons/burn_icon';
-import PrimaryButton from '@/components/primary_button';
-import SeconondaryButton from '@/components/secondary_button';
 import { useRouter } from 'next/router';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import PrimaryButton from '@/components/primary_button';
+import ProgressChart from '@/components/charts/progress_chart';
+import SecondaryButton from '@/components/secondary_button';
 
-export default function Calories() {
-  const [calories, setCalories] = useState(0);
-  const [maxCalories, setMaxCalories] = useState(0);
-  const [caloriesBurned, setCaloriesBurned] = useState(0);
+export default function Progress() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [newCalories, setNewCalories] = useState(0);
-  const [newExercise, setNewExercise] = useState(0);
+  const [startDate, setStartDate] = useState(new Date());
+  const [newWeight, setNewWeight] = useState(0);
+  const [start, setStart] = useState(0);
+  const [current, setCurrent] = useState(0);
   const router = useRouter();
 
-  const getUserDetails = async () => {
+  const addWeight = async () => {
     // Getting username from localstorage
     const username = JSON.parse(localStorage.getItem('username'));
 
-    let res = await fetch('/api/user/details', {
+    let res = await fetch('/api/user/add_weight', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username }),
+      body: JSON.stringify({
+        username,
+        value: newWeight,
+        day: startDate.getDate(),
+        month: startDate.getMonth(),
+      }),
     });
 
     if (res.status === 200) {
-      const user_data = await res.json();
-      setMaxCalories(user_data.user.calories.maximum);
-      setCalories(user_data.user.calories.consumed);
-      setCaloriesBurned(user_data.user.calories.burned);
+      location.reload();
     } else {
       alert('Error');
     }
@@ -54,10 +53,6 @@ export default function Calories() {
 
   useEffect(() => {
     checkAuthenticated();
-
-    if (isAuthenticated) {
-      getUserDetails();
-    }
   });
 
   return (
@@ -74,85 +69,55 @@ export default function Calories() {
               over time.
             </p>
           </div>
-          <div className="flex flex-row justify-center gap-4 mt-12">
-            <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 w-fit flex flex-col gap-6">
-              <div>
-                <h3 className="font-bold text-xl">Calories</h3>
-                <p className="font-light text-sm text-gray-500">
-                  Remaining = Goal - Food + Exercise
-                </p>
-              </div>
-              <div className="flex flex-row gap-6">
-                <RemainingCaloriesChart
-                  calories={calories}
-                  caloriesBurned={caloriesBurned}
-                  maxCalories={maxCalories}
-                />
-                <div className="flex flex-col justify-between">
-                  <CaloriesGoalLabel
-                    label={'Base Goal'}
-                    value={maxCalories}
-                    Icon={FlagIcon}
+          <div>
+            <div className="flex flex-col justify-center items-center gap-4 mt-12">
+              <SecondaryButton
+                label={'LOAD DATA'}
+                onClickHandler={() => location.reload()}
+              />
+              <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 w-fit flex flex-row gap-6 items-center">
+                <h3 className="font-bold text-xl w-fit whitespace-nowrap">
+                  Log Weight
+                </h3>
+                <div className="flex flex-row gap-2">
+                  <DatePicker
+                    selected={startDate}
+                    maxDate={new Date()}
+                    onChange={(date) => setStartDate(date)}
+                    className="bg-[#121212] rounded-md p-2 outline-none hover:cursor-pointer border border-gray-600 text-white focus-within:border-teal-500"
                   />
-                  <CaloriesGoalLabel
-                    label={'Food'}
-                    value={calories}
-                    Icon={FoodIcon}
-                  />
-                  <CaloriesGoalLabel
-                    label={'Exercise'}
-                    value={caloriesBurned}
-                    Icon={BurnIcon}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 flex flex-row justify-between gap-6 items-center">
-                <div>
-                  <h3 className="font-bold text-xl">Calorie Goal</h3>
-                </div>
-                <p>{`${maxCalories} CAL`}</p>
-                <SeconondaryButton
-                  label={'Edit'}
-                  onClickHandler={() => {
-                    let val = prompt('Enter new daily calorie goal');
-                    editMaximum(val);
-                  }}
-                />
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 w-fit flex flex-col justify-between gap-6">
-                  <div>
-                    <h3 className="font-bold text-xl">Add Calories</h3>
-                    <p className="font-light text-sm text-gray-500">
-                      Record calories consumed
-                    </p>
-                  </div>
                   <input
                     type="number"
-                    class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500"
+                    class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-teal-500 focus:border-teal-500 block w-full p-2.5 dark:bg-[#121212] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-teal-500 dark:focus:border-teal-500"
                     placeholder="200"
-                    value={newCalories}
-                    onChange={(e) => setNewCalories(e.target.value)}
+                    value={newWeight}
+                    onChange={(e) => setNewWeight(e.target.value)}
                   />
-                  <PrimaryButton label={'Add'} onClickHandler={addCalories} />
+                  <PrimaryButton label={'Add'} onClickHandler={addWeight} />
                 </div>
-                <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 flex flex-col justify-between gap-6">
-                  <div>
-                    <h3 className="font-bold text-xl">Add Exercise</h3>
-                    <p className="font-light text-sm text-gray-500">
-                      Record calories burned
-                    </p>
+              </div>
+              <div className="font-extralight secondaryBg shadow-md rounded-lg p-3 flex flex-col gap-6">
+                <div className="flex flex-row gap-8 items-center">
+                  <h3 className="font-bold text-xl w-fit whitespace-nowrap">
+                    Weight Progress
+                  </h3>
+                  <div className="flex flex-row text-sm font-extralight gap-4">
+                    <div className="flex flex-col items-center">
+                      <h4 className="font-semibold">{start} KG</h4>
+                      <p>START</p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <h4 className="font-semibold">{current} KG</h4>
+                      <p>CURRENT</p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <h4 className="font-semibold">{current - start} KG</h4>
+                      <p>CHANGE</p>
+                    </div>
                   </div>
-                  <input
-                    type="number"
-                    class="bg-gray-50 border focus:outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-500 dark:focus:border-cyan-500"
-                    placeholder="400"
-                    value={newExercise}
-                    onChange={(e) => setNewExercise(e.target.value)}
-                  />
-                  <PrimaryButton label={'Add'} onClickHandler={addExercise} />
+                </div>
+                <div className="">
+                  <ProgressChart setStart={setStart} setCurrent={setCurrent} />
                 </div>
               </div>
             </div>

@@ -20,6 +20,19 @@ const codesprintUserSchema = new mongoose.Schema({
       type: Number,
     },
   },
+  weight: [
+    {
+      day: {
+        type: Number,
+      },
+      month: {
+        type: Number,
+      },
+      value: {
+        type: Number,
+      },
+    },
+  ],
 });
 
 module.exports =

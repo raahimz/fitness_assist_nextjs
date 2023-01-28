@@ -10,8 +10,15 @@ export default async function handler(req, res) {
     useUnifiedTopology: true,
   });
   const codesprintUser = new CodesprintUser({
-    username: 'testuser2',
+    username: 'testuser1',
     calories: { day: 6, consumed: 0, burned: 0, maximum: 2000 },
+    weight: [
+      {
+        value: 0,
+        day: 0,
+        month: 0,
+      },
+    ],
   });
   codesprintUser.save();
 
