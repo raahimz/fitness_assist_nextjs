@@ -25,7 +25,7 @@ export default function Calories() {
         <div className="flex team-cards-container md:flex-row sm:flex-col items-center justify-center gap-4 mt-12">
           <ProfileCard
             name="Ali Abbas"
-            email={'aliabbas@gmail.com'}
+            email={'syedaliabidi22@gmail.com'}
             pic={ali_abbas}
             role={'Tester / Moral Support'}
             socialLink={'https://www.instagram.com/aliabbas_41iv41/'}

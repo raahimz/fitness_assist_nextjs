@@ -20,10 +20,12 @@ export default function Progress() {
       alert(
         'Weight can not be greater than 200, please go see a doctor and do squats along the way'
       );
+      return;
     } else if (newWeight < 20) {
       alert(
         'Weight can not be less than 20... please go see a doctor and eat some chicken along the way'
       );
+      return;
     }
 
     // Getting username from localstorage

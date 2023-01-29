@@ -37,10 +37,12 @@ export default function Index() {
         >
           <div className="flex flex-col gap-16">
             {isAuthenticated ? (
-              <div class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-teal-500">
-                <h1 className="text-3xl">Welcome Back, {username}!</h1>
-                <h1 className="font-light italic text-xl">
-                  {`What hurts today makes you stronger tomorrow! It's never too
+              <div class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-100 to-teal-600">
+                <h1 className="text-3xl">
+                  Welcome Back, <span className="italic">{username}</span>!
+                </h1>
+                <h1 className="font-light text-xl">
+                  {`If you can't track it, you can't improve it! It's never too
                 late to get started...`}
                 </h1>
               </div>
@@ -49,15 +51,15 @@ export default function Index() {
             )}
             <div className={`${!isAuthenticated ? 'mt-32' : ''}`}>
               <div className="text-3xl">
-                <h1>Fitness Assist</h1>
-                <h1 className="font-extralight italic">
-                  ~ Assist you to a Fitter Lifestyle!
+                <h1 className="font-extrabold text-4xl">Fitness Assist</h1>
+                <h1 className="font-extralight italic text-2xl ">
+                  Assist you to a Fitter Lifestyle!
                 </h1>
               </div>
-              <p className="font-extralight mt-6 lg:max-w-md">
-                In publishing and graphic design, Lorem ipsum is a placeholder
-                text commonly used to demonstrate the visual form of a document
-                or a typeface without relying on meaningful content
+              <p className="font-extralight mt-6 lg:max-w-md text-gray-300">
+                {
+                  'Welcome to our fitness tracker website! Our site features a BMI calculator, calorie tracker, and progress tracker to help you stay on track. With our easy-to-use tools, you can monitor your weight and calorie intake, and track your progress over time. Start your journey to a healthier you today!'
+                }
               </p>
               {!isAuthenticated ? (
                 <div className="mt-6">
