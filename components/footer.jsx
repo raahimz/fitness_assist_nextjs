@@ -12,6 +12,13 @@ export default function Footer() {
       <Link href={'/team'}>
         <p className="hover:opacity-75 cursor-pointer underline">Team</p>
       </Link>
+      <p>•</p>
+      <Link
+        href={'https://github.com/raahimz/fitness_assist_nextjs'}
+        target="_blank"
+      >
+        <p className="hover:opacity-75 cursor-pointer underline">Source Code</p>
+      </Link>
     </div>
   );
 }
