@@ -17,9 +17,10 @@ export default function Calories() {
           <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-teal-500">
             Team
           </h1>
-          <p className="max-w-lg ml-auto mr-auto text-gray-300 font-light text-lg">
+          <p className="max-w-lg ml-auto mr-auto text-gray-300 font-light text-xl">
             <b className="font-bold">Pro</b>
             <span className="font-extralight">Grammers</span>
+            <p className="text-sm">Beaconhouse Jubilee Campus</p>
           </p>
         </div>
         <div className="flex team-cards-container md:flex-row sm:flex-col items-center justify-center gap-4 mt-12">
