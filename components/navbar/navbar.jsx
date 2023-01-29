@@ -11,13 +11,13 @@ export default function Navbar({ isAuthenticated }) {
       />
       <div className="flex flex-row gap-8">
         <TextButton
-          label={'Bmi'}
-          url={'/bmi'}
+          label={'Calories'}
+          url={'/calories'}
           isAuthenticated={isAuthenticated}
         />
         <TextButton
-          label={'Calories'}
-          url={'/calories'}
+          label={'BMI'}
+          url={'/bmi'}
           isAuthenticated={isAuthenticated}
         />
         <TextButton

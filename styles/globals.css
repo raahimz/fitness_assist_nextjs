@@ -20,6 +20,9 @@ html {
       flex-direction: column !important;
       text-align: center !important;
   }
+  .team-cards-container {
+    flex-direction: column !important;
+  }
 }
 
 ::selection {
@@ -40,3 +43,4 @@ html {
     stroke-dasharray: 0 100;
   }
 }
+

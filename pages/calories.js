@@ -49,6 +49,11 @@ export default function Calories() {
   };
 
   const addCalories = async () => {
+    if (newCalories < 1) {
+      alert('You can not add <= 0 calories');
+      return;
+    }
+
     // Getting username from localstorage
     const username = JSON.parse(localStorage.getItem('username'));
 
@@ -71,6 +76,11 @@ export default function Calories() {
   };
 
   const addExercise = async () => {
+    if (newCalories < 1) {
+      alert('You can not add <= 0 calories');
+      return;
+    }
+
     // Getting username from localstorage
     const username = JSON.parse(localStorage.getItem('username'));
 
@@ -171,9 +181,7 @@ export default function Calories() {
               Track Your Calories
             </h1>
             <p className="max-w-lg ml-auto mr-auto text-gray-300 font-light">
-              {`Keep track of you dialy calories intake categorically and make
-              sure it's under the set limit. See how much calories you intake
-              graphically.`}
+              {`Track your daily caloric intake with ease using this calorie counter. Quickly and easily log your meals and snacks, view your daily totals, and stay on top of your health and fitness goals.`}
             </p>
           </div>
           <div className="flex flex-row justify-center gap-4 mt-12">

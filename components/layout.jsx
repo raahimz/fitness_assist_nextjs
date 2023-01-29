@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Navbar from './navbar/navbar';
 
 export default function Layout({ children, isAuthenticated }) {

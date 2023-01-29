@@ -16,6 +16,16 @@ export default function Progress() {
   const router = useRouter();
 
   const addWeight = async () => {
+    if (newWeight > 200) {
+      alert(
+        'Weight can not be greater than 200, please go see a doctor and do squats along the way'
+      );
+    } else if (newWeight < 20) {
+      alert(
+        'Weight can not be less than 20... please go see a doctor and eat some chicken along the way'
+      );
+    }
+
     // Getting username from localstorage
     const username = JSON.parse(localStorage.getItem('username'));
 

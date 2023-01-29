@@ -81,7 +81,7 @@ export default function Bmi() {
               label={'Weight'}
               labelUnit={'KG'}
               min={30}
-              max={130}
+              max={140}
             />
             <RangeSlider
               sliderVal={height}
